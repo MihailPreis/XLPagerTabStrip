@@ -322,12 +322,16 @@ open class ExampleBaseButtonBarPagerTabStripViewController: BaseButtonBarPagerTa
     }
 
     open func initialize() {
+#if SWIFT_PACKAGE
+        let bundle = Bundle.module
+#else
         var bundle = Bundle(for: ButtonBarViewCell.self)
         if let resourcePath = bundle.path(forResource: "XLPagerTabStrip", ofType: "bundle") {
             if let resourcesBundle = Bundle(path: resourcePath) {
                 bundle = resourcesBundle
             }
         }
+#endif
         
         buttonBarItemSpec = .nibFile(nibName: "ButtonCell", bundle: bundle, width: { [weak self] (childItemInfo) -> CGFloat in
             let label = UILabel()
