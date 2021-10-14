@@ -26,28 +26,49 @@ import UIKit
 import Foundation
 
 open class ButtonBarViewCell: UICollectionViewCell {
+    open var label = UILabel()
+    open var imageView = UIImageView()
 
-    @IBOutlet open var imageView: UIImageView!
-    @IBOutlet open var label: UILabel!
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
+        configuration()
+    }
 
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        
-        isAccessibilityElement = true
-        accessibilityTraits.insert([.button, .header])
+        configuration()
     }
-    
+
     open override var isSelected: Bool {
-        get {
-            return super.isSelected
-        }
+        get { super.isSelected }
         set {
             super.isSelected = newValue
-            if (newValue) {
+            if newValue {
                 accessibilityTraits.insert(.selected)
             } else {
                 accessibilityTraits.remove(.selected)
             }
         }
+    }
+
+    private func configuration() {
+        isAccessibilityElement = true
+        accessibilityTraits.insert([.button, .header])
+
+        label.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(label)
+
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(imageView)
+
+        NSLayoutConstraint.activate([
+            label.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            label.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+
+            imageView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            imageView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            imageView.widthAnchor.constraint(equalToConstant: 35),
+            imageView.heightAnchor.constraint(equalToConstant: 35)
+        ])
     }
 }

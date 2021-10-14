@@ -11,8 +11,7 @@ let package = Package(
         .target(
             name: "XLPagerTabStrip",
             path: "Sources",
-            exclude: ["FXPageControl.h", "FXPageControl.m", "TwitterPagerTabStripViewController.swift"],
-            resources: [.process("ButtonCell.xib")]
+            exclude: ["FXPageControl.h", "FXPageControl.m", "TwitterPagerTabStripViewController.swift"]
         )
     ]
 )
